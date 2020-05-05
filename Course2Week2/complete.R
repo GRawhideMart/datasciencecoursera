@@ -8,12 +8,12 @@ nameconstructor <- function(name) {
   }
 }
 
-complete <- function(directory = getwd(), id = 1:332) {
+complete <- function(directory, id = 1:332) {
   Id <- vector()
   nobs <- vector()
   for (i in id) {
     data <- read.csv(paste(nameconstructor(i),'.csv',sep=''))
-    Nobs <- length(data$ID[!is.na(data$sulfate) & !is.na(data$nitrate)])
+    Nobs <- length(data$ID[complete.cases(data)])
     Id <- c(Id, i)
     nobs <- c(nobs, Nobs)
   }

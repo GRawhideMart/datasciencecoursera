@@ -8,7 +8,7 @@ nameconstructor <- function(name) {
   }
 }
 
-pollutantmean <- function(directory = getwd(), pollutant, id = 1:332) {
+pollutantmean <- function(directory, pollutant, id = 1:332) {
   meanNA <- 0
   obsC <- 0
   weightedMean <- 0
@@ -16,12 +16,12 @@ pollutantmean <- function(directory = getwd(), pollutant, id = 1:332) {
     data <- read.csv(paste(nameconstructor(i),'.csv',sep=''))
     if (pollutant == 'sulfate') {
       notNA <- data$sulfate[!is.na(data$sulfate)]
-      meanNA <- meanNA + length(notNA)*mean(notNA)
+      meanNA <- meanNA + length(notNA)*mean(notNA, na.rm = TRUE)
       obsC <- obsC + length(notNA)
       weightedMean <- meanNA / obsC
     }  else if (pollutant == 'nitrate') {
       notNA <- data$nitrate[!is.na(data$nitrate)]
-      meanNA <- meanNA + length(notNA)*mean(notNA)
+      meanNA <- meanNA + length(notNA)*mean(notNA, na.rm = TRUE)
       obsC <- obsC + length(notNA)
       weightedMean <- meanNA / obsC
     }  
